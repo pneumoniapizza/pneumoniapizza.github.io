@@ -112,7 +112,7 @@ select:focus-visible {
 * {
   margin: 0;
   padding: 0;
-  font: inherit;
+  /* font: inherit; commented to avoid same sized font*/
   box-sizing: border-box;
 }
 

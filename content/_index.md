@@ -2,7 +2,7 @@
 title = "Hello"
 +++
 
-## Introduction
+# Introduction
 
 <span lang="ja">こんにちは。</span> I'm **Daksh**, online as **pneumoniapizza**.
 
