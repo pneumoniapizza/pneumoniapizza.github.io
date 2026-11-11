@@ -1,0 +1,36 @@
+{% component toc(items) %}
+<ol>
+  {%- for h in items %}
+  <li>
+    <a href="{{ h.permalink | safe }}">{{ h.title }}</a>
+    {%- if h.children %}{{<toc items={h.children} />}}{% endif %}
+  </li>
+  {%- endfor %}
+</ol>
+{% endcomponent toc %}
+
+{% component post_date(d) %}<time datetime="{{ d | date(format="%Y-%m-%d") }}">{{ d | date(format="%Y-%m-%d") }}&nbsp;</time>{% endcomponent post_date %}
+
+{% component back_link(url) %}
+<div class="terminal-nav">
+  <div class="back-nav"><a href="{{ url }}" class="back-link">../</a></div>
+</div>
+{% endcomponent back_link %}
+
+{% component post_table(pages) %}
+<table class="time-list">
+  <tbody>
+    {%- for p in pages %}
+    <tr>
+      <td class="time-list__date">{% if p.date %}{{<post_date d={p.date} />}}{% endif %}</td>
+      <td class="time-list__title"><a href="{{ p.permalink }}">{{ p.title }}</a></td>
+    </tr>
+    {%- endfor %}
+  </tbody>
+</table>
+{% endcomponent post_table %}
+
+{% component mermaid(align="center") %}
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<div class="mermaid" align="{{ align }}">{{ body | safe }}</div>
+{% endcomponent mermaid %}

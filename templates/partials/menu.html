@@ -1,0 +1,7 @@
+<nav aria-label="Main navigation">
+  <ul>
+    {%- for item in config.extra.menu %}
+    <li><a href="{{ get_url(path=item.url, trailing_slash=true) }}"{% if current_path == item.url %} class="active" aria-current="page"{% endif %}>{{ item.name }}</a></li>
+    {%- endfor %}
+  </ul>
+</nav>

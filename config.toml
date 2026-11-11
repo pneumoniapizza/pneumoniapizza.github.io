@@ -1,0 +1,32 @@
+base_url = "https://example.org"
+title = "pneumoniapizza (肺炎ピザ)"
+description = "Daksh (ダクシュ), a.k.a. pneumoniapizza. Systems, Linux and backend notes."
+default_language = "en"
+generate_feeds = true
+build_search_index = false
+taxonomies = [{ name = "tags", feed = true }]
+
+[markdown]
+bottom_footnotes = true
+[markdown.highlighting]
+light_theme = "github-light"
+dark_theme = "github-dark"
+style = "class"
+
+[extra]
+author = "Daksh"
+author_ja = "ダクシュ"
+alias = "pneumoniapizza"
+# Optional. Leave empty to omit.
+og_image = ""
+twitter_handle = ""
+show_toc = true
+show_reading_time = true
+show_lastmod = false
+
+menu = [
+  { name = "Posts", url = "/posts/" },
+  { name = "Tags", url = "/tags/" },
+  { name = "About", url = "/about/" },
+  { name = "Contact", url = "/contact/" },
+]

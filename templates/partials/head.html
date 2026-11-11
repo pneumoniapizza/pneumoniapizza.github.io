@@ -1,0 +1,60 @@
+{%- if current_url %}{% set url = current_url %}{% else %}{% set url = config.base_url %}{% endif -%}
+{%- if page is defined and page %}
+  {%- set cur_title = page.title %}{% set cur_desc = page.description | default(value=config.description) %}
+{%- elif section is defined and section %}
+  {%- set cur_title = section.title | default(value="") %}{% set cur_desc = section.description | default(value=config.description) %}
+{%- elif term is defined and term %}
+  {%- set cur_title = term.name %}{% set cur_desc = config.description %}
+{%- else %}
+  {%- set cur_title = config.title %}{% set cur_desc = config.description %}
+{%- endif %}
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{% if current_path == "/" or not cur_title %}{{ config.title }}{% else %}{{ cur_title }} | {{ config.title }}{% endif %}</title>
+{% if cur_desc %}<meta name="description" content="{{ cur_desc }}" />{% endif %}
+<link rel="canonical" href="{{ url | safe }}" />
+
+<meta property="og:title" content="{{ cur_title | default(value=config.title) }}" />
+{% if cur_desc %}<meta property="og:description" content="{{ cur_desc }}" />{% endif %}
+<meta property="og:type" content="{% if page is defined and page %}article{% else %}website{% endif %}" />
+<meta property="og:url" content="{{ url | safe }}" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="{{ cur_title | default(value=config.title) }}" />
+{% if config.extra.og_image %}
+<meta property="og:image" content="{{ get_url(path=config.extra.og_image) }}" />
+<meta name="twitter:image" content="{{ get_url(path=config.extra.og_image) }}" />
+{% endif %}
+{% if config.extra.twitter_handle %}<meta name="twitter:site" content="@{{ config.extra.twitter_handle }}" />{% endif %}
+
+{% if config.generate_feeds %}
+<link rel="alternate" type="application/atom+xml" title="{{ config.title }}" href="{{ get_url(path="atom.xml", trailing_slash=false) }}" />
+{% endif %}
+
+{% if page is defined and page and page.date %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": {{ page.title | json_encode() | safe }},
+  "url": {{ page.permalink | json_encode() | safe }},
+  "datePublished": "{{ page.date }}",
+  "dateModified": "{{ page.updated | default(value=page.date) }}",
+  "author": { "@type": "Person", "name": {{ config.extra.author | json_encode() | safe }}, "alternateName": {{ config.extra.alias | json_encode() | safe }} }
+}
+</script>
+{% endif %}
+
+<!-- <link rel="icon" href="{{ get_url(path="favicon.ico") }}" sizes="any" /> -->
+<!-- <link rel="icon" type="image/png" sizes="32x32" href="{{ get_url(path="favicon/favicon-32x32.png") }}" /> -->
+<!-- <link rel="icon" type="image/png" sizes="16x16" href="{{ get_url(path="favicon/favicon-16x16.png") }}" /> -->
+<!-- <link rel="icon" type="image/png" sizes="192x192" href="{{ get_url(path="favicon/android-icon-192x192.png") }}" /> -->
+<!-- <link rel="apple-touch-icon" sizes="180x180" href="{{ get_url(path="favicon/apple-icon-180x180.png") }}" /> -->
+
+<link rel="icon" href="{{ get_url(path="favicon.jpg") }}" sizes="any" />
+
+<link rel="preload" href="{{ get_url(path="fonts/IBMPlexMono-Regular.woff2") }}" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="{{ get_url(path="css/main.css", cache_busting=true) }}" />
+{#- Code highlighting: Zola emits giallo-light.css / giallo-dark.css (style = "class" in config.toml). -#}
+<link rel="stylesheet" href="{{ get_url(path="giallo-light.css") }}" media="(prefers-color-scheme: light)" />
+<link rel="stylesheet" href="{{ get_url(path="giallo-dark.css") }}" media="(prefers-color-scheme: dark)" />
+<link rel="stylesheet" href="{{ get_url(path="css/custom.css", cache_busting=true) }}" />

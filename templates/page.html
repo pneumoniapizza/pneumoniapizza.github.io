@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>{{ page.title }}</h1>
+  {% include "partials/terms.html" %}
+
+  {%- set show_toc = page.extra.toc | default(value=config.extra.show_toc | default(value=true)) %}
+  {%- if show_toc and page.toc %}
+  <details class="toc" open>
+    <summary class="toc-title">Table of contents</summary>
+    <nav class="toc-content">
+      {{<toc items={page.toc} />}}
+    </nav>
+  </details>
+  {%- endif %}
+
+  {{ page.content | safe }}
+
+  {%- if page.date %}
+  <div class="time">
+    {{<post_date d={page.date} />}}
+    {%- set show_rt = page.extra.show_reading_time | default(value=config.extra.show_reading_time | default(value=true)) %}
+    {%- if show_rt %}<span class="reading-time"> · {{ page.reading_time }} min read</span>{% endif %}
+    {%- set show_lm = page.extra.show_lastmod | default(value=config.extra.show_lastmod | default(value=false)) %}
+    {%- if show_lm and page.updated %}<span class="lastmod"> · Last updated: {{ page.updated }}</span>{% endif %}
+  </div>
+  {%- endif %}
+
+  {%- set parent = get_section(path=page.ancestors | last) %}
+  {{<back_link url={parent.permalink} />}}
+{% endblock content %}

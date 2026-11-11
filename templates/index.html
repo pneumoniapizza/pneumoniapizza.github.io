@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block content %}
+  {{ section.content | safe }}
+  <div class="terminal-nav">
+    {% include "partials/menu.html" %}
+  </div>
+{% endblock content %}

@@ -1,0 +1,109 @@
+/* Overrides, loaded after main.css. */
+
+/* IBM Plex Mono (SIL OFL, see static/fonts/), self-hosted. */
+@font-face {
+  font-family: "IBM Plex Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/IBMPlexMono-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/IBMPlexMono-Italic.woff2") format("woff2");
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/IBMPlexMono-Bold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/IBMPlexMono-BoldItalic.woff2") format("woff2");
+}
+
+/* Plex Mono has no kana/kanji: fall back per glyph to system Japanese fonts. */
+:root {
+  --font-family-mono: "IBM Plex Mono", "SF Mono", Menlo, "Hiragino Sans", "Noto Sans JP", "Yu Gothic", Meiryo, monospace;
+
+  /* Washi paper: warm off-white. The theme derives every other grey from these
+     three knobs, so the whole page keeps the same warm tint. */
+  --bg-h: 40;
+  --bg-s: 22%;
+  --bg-l: 96%;
+
+  /* One accent, used sparingly (shu-iro, vermilion). */
+  --accent: hsl(8 72% 44%);
+}
+
+/* Follow the OS colour scheme. Delete this block for light-only. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-h: 35;
+    --bg-s: 8%;
+    --bg-l: 11%;
+    --accent: hsl(8 80% 68%);
+  }
+}
+
+/* main.css leaves most links at the browser default (blue). Inherit instead. */
+a {
+  color: inherit;
+}
+a:hover,
+.terms-list a,
+.back-link:hover {
+  color: var(--accent);
+}
+.terms-list a {
+  font-style: italic;
+}
+.terminal-nav nav ul li a.active {
+  color: var(--accent);
+}
+::selection {
+  background: color-mix(in srgb, var(--accent) 30%, transparent);
+  color: var(--color-text-primary);
+}
+
+/* Code blocks: keep giallo's token colours, use the page's own background. */
+pre.giallo {
+  background-color: var(--color-bg-secondary);
+}
+
+/* Headings: show markdown-style hashes (replaces the 1. / 1.1. counters). */
+h1::before,
+h2:not(.manual-number)::before,
+h3:not(.manual-number)::before,
+h4:not(.manual-number)::before,
+h5:not(.manual-number)::before,
+h6::before {
+  color: var(--accent);
+  font-weight: 400;
+  margin-right: 0.5ch;
+}
+h1::before { content: "#"; }
+h2:not(.manual-number)::before { content: "##"; }
+h3:not(.manual-number)::before { content: "###"; }
+h4:not(.manual-number)::before { content: "####"; }
+h5:not(.manual-number)::before { content: "#####"; }
+h6::before { content: "######"; }
+
+/* Edgy: no rounded corners anywhere. */
+:root {
+  --pre-border-radius: 0;
+  --inline-border-radius: 0;
+}
+*,
+*::before,
+*::after {
+  border-radius: 0 !important;
+}

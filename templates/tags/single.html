@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>#{{ term.name }}</h1>
+  {{<post_table pages={term.pages} />}}
+  {{<back_link url={get_url(path="tags", trailing_slash=true)} />}}
+{% endblock content %}

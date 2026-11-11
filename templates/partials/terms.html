@@ -1,0 +1,10 @@
+{#- Expects `page` in scope. -#}
+{%- if page.taxonomies and page.taxonomies.tags %}
+<div class="terms-list">
+  <ul>
+    {%- for tag in page.taxonomies.tags %}
+    <li><a href="{{ get_taxonomy_url(kind="tags", name=tag) }}">#{{ tag }}</a></li>
+    {%- endfor %}
+  </ul>
+</div>
+{%- endif %}

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>404 - Page Not Found</h1>
+  <p>The page you're looking for doesn't exist or has been moved.</p>
+  <nav aria-label="404 navigation">
+    <ul>
+      <li><a href="{{ get_url(path="/") }}">← Return to homepage</a></li>
+      <li><a href="{{ get_url(path="/posts/", trailing_slash=true) }}">Browse posts</a></li>
+      <li><a href="{{ get_url(path="/about/", trailing_slash=true) }}">About page</a></li>
+    </ul>
+  </nav>
+{% endblock content %}

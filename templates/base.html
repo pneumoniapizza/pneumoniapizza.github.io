@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="{{ lang }}" dir="ltr">
+  <head>
+    {% include "partials/head.html" %}
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to content</a>
+    <header role="banner">{% include "partials/header.html" %}</header>
+    <main id="main-content" role="main">{% block content %}{% endblock content %}</main>
+    <footer role="contentinfo">{% include "partials/footer.html" %}</footer>
+  </body>
+</html>
