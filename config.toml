@@ -25,8 +25,8 @@ show_reading_time = true
 show_lastmod = false
 
 menu = [
-  { name = "Posts", url = "/posts/" },
-  { name = "Tags", url = "/tags/" },
-  { name = "About", url = "/about/" },
-  { name = "Contact", url = "/contact/" },
+  { name = "~/Posts", url = "/posts/" },
+  { name = "~/Tags", url = "/tags/" },
+  { name = "~/About", url = "/about/" },
+  { name = "~/Contact", url = "/contact/" },
 ]

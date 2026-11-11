@@ -3,9 +3,9 @@
   <ol>
     {%- set here = current_path | default(value="/") %}
     {%- if here == "/" %}
-    <li class="current">/<a href="{{ get_url(path="/") }}">{{ config.title }}</a></li>
+    <li class="current">~/<a href="{{ get_url(path="/") }}">{{ config.title }}</a></li>
     {%- else %}
-    <li>/<a href="{{ get_url(path="/") }}">{{ config.title }}</a> /</li>
+    <li>~/<a href="{{ get_url(path="/") }}">{{ config.title }}</a> /</li>
     {%- if page is defined and page %}
       {%- for a in page.ancestors %}
         {%- set s = get_section(path=a) %}
